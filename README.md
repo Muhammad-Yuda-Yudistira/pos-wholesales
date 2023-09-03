@@ -1,6 +1,6 @@
 # Point of Sale (POS) Application
 
-![Database Schema](./images/db_schema.png)
+![Database Schema](./public/db-schema.jpg)
 
 ## Overview
 
