@@ -6,6 +6,11 @@
 
 This Point of Sale (POS) application is designed to streamline sales, manage inventory, and simplify business operations for retail businesses. It provides an intuitive user interface for handling various aspects of your business, including sales management, product inventory, customer data, and employee roles and permissions.
 
+## Contributors
+
+Currently this project is initiated by me and contributed by fellow @aripbudiman, give us DM if you wanted to contribute also.
+
+
 ## Features
 
 - **Sales Management**: Create, process, and track sales orders, including the ability to add products, apply discounts, and print receipts or invoices.
@@ -41,9 +46,10 @@ npm install && npm run dev
   ```
 
 4. **Start the Application**:
-```php artisan serve
-
-```
+- Start the Application:
+  ```
+  php artisan serve
+  ```
 
 5. **Access the Application**:
 Open your web browser and navigate to `http://localhost:8000` to access the application.
