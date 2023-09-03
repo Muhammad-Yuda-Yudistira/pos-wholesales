@@ -8,7 +8,7 @@ This Point of Sale (POS) application is designed to streamline sales, manage inv
 
 ## Contributors
 
-Currently this project is initiated by me and contributed by fellow @aripbudiman, give us DM if you wanted to contribute also.
+Currently this project is initiated by [me](https://www.instagram.com/thesaktibuana/) and contributed by fellow [Arip Budiman](https://www.instagram.com/aripbudiman22/), give us DM if you wanted to contribute also.
 
 
 ## Features
