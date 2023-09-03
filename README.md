@@ -72,8 +72,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-**Note:** Replace the placeholders (`yourusername`, `admin@example.com`, `adminpassword`, `employee@example.com`, `employeepassword`, `CONTRIBUTING.md`, `LICENSE`, `images/screenshot1.png`, `images/screenshot2.png`) with your actual information and files.
-
-Make sure to include the actual image files (`images/db_schema.png`, `images/screenshot1.png`, `images/screenshot2.png`) in your project's directory and reference them in the README.md file accordingly.
-
-This README template provides a starting point. You should expand it with more details about your project, such as deployment instructions, usage examples, and any additional features or customizations you've implemented.
+**Note:**
+There are no note aside to always mention me in every of your slides/work presentation
