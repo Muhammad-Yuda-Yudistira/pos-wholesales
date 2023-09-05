@@ -110,26 +110,24 @@
         },
         "/users": {
             "get": {
+                "summary": "Get all users",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "tags": [
                     "Users"
                 ],
-                "security": [
-                    {
-                        "CSRFToken": []
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {}
-                    }
-                },
-                "summary": "List of users",
                 "responses": {
                     "200": {
-                        "description": "List of users"
+                        "description": "Users retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
                     },
                     "404": {
-                        "description": "Data tidak ditemukan"
+                        "description": "Users not found"
                     }
                 }
             }
@@ -137,10 +135,10 @@
     },
     "components": {
         "securitySchemes": {
-            "CSRFToken": {
-                "type": "apiKey",
-                "in": "header",
-                "name": "X-CSRF-Token"
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         },
         "schemas": {

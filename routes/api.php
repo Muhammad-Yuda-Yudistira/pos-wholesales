@@ -6,6 +6,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\EmployeeController;
+use App\Http\Controllers\API\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put('/customer/update_customer/{id}',[CustomerController::class,'updateCustomer']);
     Route::post('/customer/search',[CustomerController::class,'searchCustomer']);
     Route::get('/customer/view_all_customer',[CustomerController::class,'viewAllCustomer']);
+    Route::post('/supplier/add',[SupplierController::class,'addNewSupplier']);
+    Route::get('/supplier/show/{id}',[SupplierController::class,'showSupplier']);
+    Route::put('/supplier/update/{id}',[SupplierController::class,'updateSupplier']);
+    Route::get('supplier/show_all',[SupplierController::class,'showAllSupplier']);
 });

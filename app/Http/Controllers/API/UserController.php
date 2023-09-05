@@ -59,11 +59,9 @@ class UserController extends Controller
     {
        // Cari pengguna berdasarkan ID yang diberikan dalam URL
         $user = User::find($id);
-
         if (!$user) {
             return response()->json(['message' => 'Pengguna tidak ditemukan'], 404);
         }
-
         // Validasi permintaan
         $validator = Validator::make($request->all(), [
             'new_username' => 'required|string|max:255', 
