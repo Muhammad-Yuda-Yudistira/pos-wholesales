@@ -18,6 +18,26 @@
         {
             "name": "Users",
             "description": "Everything related to user"
+        },
+        {
+            "name": "Employee",
+            "description": "Everything related to employee"
+        },
+        {
+            "name": "Customer",
+            "description": "Everything related to customer"
+        },
+        {
+            "name": "Product",
+            "description": "Everything related to product"
+        },
+        {
+            "name": "Category",
+            "description": "Everything related to category"
+        },
+        {
+            "name": "Order",
+            "description": "Everything related to order"
         }
     ],
     "paths": {
@@ -83,7 +103,7 @@
                                 "properties": {
                                     "username": {
                                         "type": "string",
-                                        "default": "arip budiman"
+                                        "default": "admin"
                                     },
                                     "password": {
                                         "type": "string",
@@ -128,6 +148,938 @@
                     },
                     "404": {
                         "description": "Users not found"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "summary": "show  details user",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/view_all_employee": {
+            "get": {
+                "summary": "Get all employee",
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/show_detail_employee/{id}": {
+            "get": {
+                "summary": "Show detail employee",
+                "description": "Show detail employee by id",
+                "tags": [
+                    "Employee"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employee retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/search": {
+            "post": {
+                "summary": "Search employee",
+                "description": "Search employee by keyword first name and last name",
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string",
+                                "properties": {
+                                    "keyword": {
+                                        "type": "string",
+                                        "default": "arip"
+                                    }
+                                },
+                                "required": [
+                                    "keyword"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employee retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/add": {
+            "post": {
+                "summary": "Add employee",
+                "description": "Add new employee",
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "default": "steve"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "default": "jobs"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "default": "user"
+                                    },
+                                    "supervisor_id": {
+                                        "type": "integer",
+                                        "default": 3
+                                    },
+                                    "phone": {
+                                        "type": "number",
+                                        "default": "082111111621"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "default": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employee added successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/employee/update/{id}": {
+            "put": {
+                "summary": "Update employee",
+                "description": "Update employee by id",
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "default": "steve"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "default": "jobs"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "default": "user"
+                                    },
+                                    "supervisor_id": {
+                                        "type": "integer",
+                                        "default": 3
+                                    },
+                                    "phone": {
+                                        "type": "number",
+                                        "default": "082111111621"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "default": 2
+                                    }
+                                }
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "default": "steve"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "default": "jobs"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "default": "user"
+                                    },
+                                    "supervisor_id": {
+                                        "type": "integer",
+                                        "default": 3
+                                    },
+                                    "phone": {
+                                        "type": "number",
+                                        "default": "082111111621"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "default": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employee updated successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Employee not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/add_new_customer": {
+            "post": {
+                "summary": "Add new customer",
+                "description": "Add new customer",
+                "tags": [
+                    "Customer"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer added successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Customer not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/edit_customer/{id}": {
+            "get": {
+                "summary": "Edit customer",
+                "description": "Edit customer by id",
+                "tags": [
+                    "Customer"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Customer not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/search": {
+            "post": {
+                "summary": "Search customer",
+                "description": "Search customer by keyword name customer",
+                "tags": [
+                    "Customer"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "keyword": {
+                                        "type": "string",
+                                        "default": "bunga"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Customer not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/view_all_customer": {
+            "get": {
+                "summary": "View all customer",
+                "description": "View all customer",
+                "tags": [
+                    "Customer"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Customer not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/update_customer/{id}": {
+            "put": {
+                "summary": "Update customer",
+                "description": "Update customer by id",
+                "tags": [
+                    "Customer"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer updated successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Customer not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/product/add_new_product": {
+            "post": {
+                "summary": "Add new product",
+                "description": "Add new product",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Products"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "$ref": "#/components/responses/product/201"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/view_all": {
+            "get": {
+                "summary": "View all product",
+                "description": "View all product",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/show/{id}": {
+            "get": {
+                "summary": "Show product",
+                "description": "Show product by id",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/update/{id}": {
+            "put": {
+                "summary": "Update product",
+                "description": "Update product by id",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Products"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/search": {
+            "post": {
+                "summary": "Search product",
+                "description": "Search product by keyword name product",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "keyword": {
+                                        "type": "string",
+                                        "default": "mie"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/add_stock": {
+            "post": {
+                "summary": "Add stock",
+                "description": "Add stock",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "quantity_in_stock": {
+                                        "type": "integer",
+                                        "default": 40
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/product/display_all_inventory": {
+            "get": {
+                "summary": "Display all inventory",
+                "description": "Display all inventory",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/product/200"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/product/404"
+                    }
+                }
+            }
+        },
+        "/category/add_new_category": {
+            "post": {
+                "summary": "Add new category",
+                "description": "Add new category",
+                "tags": [
+                    "Category"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "default": "Tes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category added successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/category/view_all_category": {
+            "get": {
+                "summary": "View all category",
+                "description": "View all category",
+                "tags": [
+                    "Category"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/category/view_category_with_product": {
+            "get": {
+                "summary": "View category with product",
+                "description": "View category with product",
+                "tags": [
+                    "Category"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category retrieved successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Category not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/sales_order/store": {
+            "post": {
+                "summary": "Store sales order",
+                "description": "Store sales order",
+                "tags": [
+                    "Order"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "order_date": {
+                                        "type": "string",
+                                        "default": "2022-01-01"
+                                    },
+                                    "total_amount": {
+                                        "type": "number",
+                                        "default": 30000
+                                    },
+                                    "payment_status": {
+                                        "type": "string",
+                                        "default": "pending"
+                                    },
+                                    "item": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "order_id": {
+                                                    "type": "integer",
+                                                    "default": 1
+                                                },
+                                                "product_id": {
+                                                    "type": "integer",
+                                                    "default": 1
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "default": 3
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "default": 30000
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sales order created successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Sales order not found",
+                        "content": {
+                            "application/json": {}
+                        }
                     }
                 }
             }
@@ -177,6 +1129,57 @@
                     "password",
                     "email"
                 ]
+            },
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "default": "bunga"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "default": "anggun"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "default": "bunga@gmail.com"
+                    },
+                    "phone": {
+                        "type": "number",
+                        "default": "08654725512"
+                    },
+                    "address": {
+                        "type": "string",
+                        "default": "jakarta"
+                    }
+                }
+            },
+            "Products": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "default": "mie indomie"
+                    },
+                    "category_id": {
+                        "type": "integer",
+                        "default": 1
+                    },
+                    "description": {
+                        "type": "string",
+                        "default": "mie instant"
+                    },
+                    "price": {
+                        "type": "number",
+                        "default": 4000
+                    },
+                    "cost_price": {
+                        "type": "number",
+                        "default": 400
+                    }
+                }
             }
         },
         "responses": {
@@ -185,6 +1188,40 @@
             },
             "NotFoundResponse": {
                 "description": "Data tidak ditemukan"
+            },
+            "product": {
+                "200": {
+                    "description": "List Product",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "201": {
+                    "description": "Product added successfully",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "404": {
+                    "description": "Product not found",
+                    "content": {
+                        "application/json": {}
+                    }
+                }
+            },
+            "category": {
+                "200": {
+                    "description": "Category added successfully",
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "404": {
+                    "description": "Category not found",
+                    "content": {
+                        "application/json": {}
+                    }
+                }
             }
         }
     }

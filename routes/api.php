@@ -7,6 +7,10 @@ use App\Http\Controllers\API\CustomerController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\CategoriesController;
+use App\Http\Controllers\API\SalesOrderController;
+use App\Http\Controllers\API\CoaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +44,17 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/supplier/show/{id}',[SupplierController::class,'showSupplier']);
     Route::put('/supplier/update/{id}',[SupplierController::class,'updateSupplier']);
     Route::get('supplier/show_all',[SupplierController::class,'showAllSupplier']);
+    Route::post('/product/add_new_product',[ProductController::class,'addNewProduct']);
+    Route::get('/product/view_all',[ProductController::class,'viewAllProduct']);
+    Route::get('/product/show/{id}',[ProductController::class,'showProduct']);
+    Route::put('/product/update/{id}',[ProductController::class,'updateProduct']);
+    Route::post('/product/search',[ProductController::class,'searchProduct']);
+    Route::post('/product/add_stock',[ProductController::class,'addStockToProduct']);
+    Route::get('/product/display_all_inventory',[ProductController::class,'displayAllinventory']);
+    Route::post('/coa/add_new_coa',[CoaController::class,'addNewCoa']);
+    Route::get('/coa/view_all_coa',[CoaController::class,'viewAllCoa']);
+    Route::post('/category/add_new_category',[CategoriesController::class,'addNewCategory']);
+    Route::get('/category/view_all_category',[CategoriesController::class,'viewAllCategory']);
+    Route::get('/category/view_category_with_product',[CategoriesController::class,'viewCategoryWithProduct']);
+    Route::post('/sales_order/store',[SalesOrderController::class,'store']);
 });

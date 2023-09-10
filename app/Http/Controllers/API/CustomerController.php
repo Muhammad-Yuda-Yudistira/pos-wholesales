@@ -15,7 +15,7 @@ class CustomerController extends Controller
         $validator=Validator::make(request()->all(),[
             'first_name'=>'required|max:255',
             'last_name'=>'required|max:255',
-            'email'=>'required|email|unique:customers,email',
+            'email'=>'required',
             'phone'=>'required',
             'address'=>'required',
         ]);
@@ -33,7 +33,14 @@ class CustomerController extends Controller
 
     public function editCustomer($id){
         $customer = Customer::findOrFail($id);
-        return (new GetResource(true,'show Customer detail',$customer))->response()->setStatusCode(200);
+        if(empty($customer)){
+            return response()->json([
+                'success'=>false,
+                'message'=>'Customer not found'
+            ],404);
+        }else{
+            return (new GetResource(true,'show Customer detail',$customer))->response()->setStatusCode(200);
+        }
     }
 
     public function updateCustomer(Request $request, $id){  

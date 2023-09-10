@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('oder_items', function (Blueprint $table) {
-            $table->foreignId('oder_id')->constrained('sales_orders');
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->foreignId('order_id')->constrained('sales_orders');
             $table->foreignId('product_id')->constrained('products');
             $table->integer('quantity');
             $table->decimal('subtotal',10,2);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('oder_items');
+        Schema::dropIfExists('order_items');
     }
 };

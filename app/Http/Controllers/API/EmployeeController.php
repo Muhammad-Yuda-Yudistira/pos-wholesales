@@ -13,8 +13,8 @@ class EmployeeController extends Controller
 {
     public function store(Request $request){
         $validator=Validator::make($request->all(),[
-            'first_name'=>'required',
-            'last_name'=>'required',
+            'first_name'=>'required|string|unique:employees',
+            'last_name'=>'required|string|unique:employees',
             'position'=>'required',
             'phone'=>'required',
             'supervisor_id'=>'required',
@@ -67,7 +67,7 @@ class EmployeeController extends Controller
             'user_id'=>Auth::id(),
             'supervisor_id'=>$request->supervisor_id
         ]);
-        return (new PostResource(true,'Employee has been edited',$employee))->response()->setStatusCode(200);
+        return (new PostResource(true,'show details employee',$employee))->response()->setStatusCode(200);
     }
     public function search(Request $request)
     {
@@ -88,6 +88,9 @@ class EmployeeController extends Controller
 
     public function viewAllEmployee(){
         $employees=Employee::all();
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         return (new PostResource(true,'All Employees',$employees))->response()->setStatusCode(200);
     }
 }
