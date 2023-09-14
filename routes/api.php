@@ -51,6 +51,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/product/search',[ProductController::class,'searchProduct']);
     Route::post('/product/add_stock',[ProductController::class,'addStockToProduct']);
     Route::get('/product/display_all_inventory',[ProductController::class,'displayAllinventory']);
+    Route::get('/product/receive_new_stock',[ProductController::class,'receiveNewStock']);
     Route::post('/coa/add_new_coa',[CoaController::class,'addNewCoa']);
     Route::get('/coa/view_all_coa',[CoaController::class,'viewAllCoa']);
     Route::post('/category/add_new_category',[CategoriesController::class,'addNewCategory']);

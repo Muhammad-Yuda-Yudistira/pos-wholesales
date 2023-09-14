@@ -31,7 +31,7 @@ class ProductController extends Controller
 
 
     public function viewAllProduct(){
-        $product = Product::withSum('inventory as stock','quantity_in_stock')->get();
+        $product = Product::with('category')->withSum('inventory as stock','quantity_in_stock')->orderBy('id','desc')->get();
         return (new PostResource(true,'All Products',$product))->response()->setStatusCode(200);
     }
 
@@ -60,7 +60,7 @@ class ProductController extends Controller
 
     public function searchProduct(Request $request){
         $keyword = $request->input('keyword');
-        $product = Product::where('name','like','%'.$keyword.'%')->get();
+        $product = Product::with('category')->where('name','like','%'.$keyword.'%')->get();
         return (new PostResource(true,'All Products',$product))->response()->setStatusCode(200);
     }
 
@@ -82,5 +82,10 @@ class ProductController extends Controller
     public function displayAllinventory(){
         $inventory = Inventory::with('product')->orderBy('id','desc')->get();
         return (new PostResource(true,'All Inventory',$inventory))->response()->setStatusCode(200);
+    }
+
+    public function receiveNewStock(){
+        $inventory = Inventory::with('product')->orderBy('id','desc')->get();
+        return (new PostResource(true,'Receive New Stock',$inventory))->response()->setStatusCode(200);
     }
 }

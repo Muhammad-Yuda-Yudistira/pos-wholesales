@@ -53,8 +53,11 @@ class AuthController extends Controller
             $token= $user->createToken('auth_token')->plainTextToken;
             return (new AuthResource(true, 'Login Success', [
                 'username' => $user->username,
-                'token' => $token
+                'token' => $token,
+                'data'=>$user
             ]))->response()->setStatusCode(200);
+        }else{
+            return response()->json(['message' => 'Login failed username or password tidak sesuai'], 401);
         }
 
     }

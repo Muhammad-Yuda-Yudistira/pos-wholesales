@@ -22,7 +22,7 @@ class CategoriesController extends Controller
     }
 
     public function viewAllCategory(){
-        $category=Categories::all();
+        $category=Categories::with('product')->get();
         return (new PostResource(true,'list categories',$category))->response()->setStatusCode(201);
     }
 

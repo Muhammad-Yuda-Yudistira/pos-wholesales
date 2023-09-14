@@ -905,6 +905,34 @@
                 }
             }
         },
+        "/product/receive_new_stock": {
+            "get": {
+                "summary": "Receive new stock",
+                "description": "Receive new stock",
+                "tags": [
+                    "Product"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Receive new stock successfully",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
         "/category/add_new_category": {
             "post": {
                 "summary": "Add new category",
