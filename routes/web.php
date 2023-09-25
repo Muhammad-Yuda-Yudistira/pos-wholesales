@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SalesOrderController as SalesOrder;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,15 +21,34 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/login',[AuthenticationController::class,'login'])->name('login');
+Route::get('/register',[AuthenticationController::class,'register'])->name('register');
+Route::post('/login',[AuthenticationController::class,'loginStore'])->name('login');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+
+Route::middleware('auth')->group(function () {
+Route::get('/',[DashboardController::class,'index'])->name('dashboard');
+Route::get('/user',[UserController::class,'index'])->name('user');
+Route::get('/product',[ProductController::class,'index'])->name('product.index');
+Route::post('/product/store',[ProductController::class,'store'])->name('product.store');
+Route::get('/inventory',[InventoryController::class,'index'])->name('inventory.index');
+Route::post('/inventory/store',[InventoryController::class,'store'])->name('inventory.store');
+Route::get('/sales_order',[SalesOrder::class,'index'])->name('sales_order.index');
+Route::post('/sales_order/new_transaction',[SalesOrder::class,'new_transaction'])->name('sales_order.new_transaction');
+Route::post('/sales_order/add_item',[SalesOrder::class,'add_item'])->name('sales_order.add_item');
+Route::post('/sales_order/cancel',[SalesOrder::class,'cancel'])->name('sales_order.cancel');
+Route::post('/sales_order/counter_plus',[SalesOrder::class,'counter_plus'])->name('sales_order.counter_plus');
+Route::post('/sales_order/counter_minus',[SalesOrder::class,'counter_minus'])->name('sales_order.counter_minus');
 });
+
+
+
+
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

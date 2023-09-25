@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->integer('quantity_in_stock');
+            $table->unsignedBigInteger('quantity_in_stock')->default(0);
             $table->timestamps();
         });
     }

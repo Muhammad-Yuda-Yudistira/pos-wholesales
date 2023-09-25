@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inventory_adjustments', function (Blueprint $table) {
-            $table->foreignId('inventory_id')->constrained('inventories');
+            $table->foreignId('product_id')->constrained('inventories');
             $table->date('adjustment_date');
             $table->text('reason');
             $table->integer('quantity_change');
             $table->timestamps();
+
+            // $table->foreign('inventory_id')->references('id')->on('inventories');
         });
     }
 

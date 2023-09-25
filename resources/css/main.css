@@ -1,0 +1,23 @@
+.scrollable::-webkit-scrollbar {
+    display: none;
+  }
+
+.btn{
+  @apply first-letter:uppercase lowercase
+}
+
+  .btn-fuchsia{
+    @apply bg-fuchsia-900 hover:bg-fuchsia-800 text-orange-500 hover:text-white hover:border hover:border-orange-200;
+}
+
+.btn-orange{
+  @apply bg-orange-500 hover:bg-orange-400 text-white hover:text-slate-800 
+}
+
+.btn-vanila{
+  @apply bg-white hover:bg-fuchsia-50 text-fuchsia-900 hover:text-fuchsia-950 shadow-sm
+}
+
+.btn-outline-fuchsia{
+  @apply border-fuchsia-900 hover:border-fuchsia-800 bg-white hover:bg-fuchsia-900 text-fuchsia-900 hover:text-white
+}

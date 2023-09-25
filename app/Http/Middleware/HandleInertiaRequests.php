@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use App\Models\Sales_order;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -41,6 +42,12 @@ class HandleInertiaRequests extends Middleware
             ],
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
+            ],
+            'response' => [
+                'response' => fn () => $request->session()->get('response')
+            ],
+            'id_sales' =>[
+                'id_sales' => fn () => $request->session()->get('id_sales')
             ],
         ];
     }

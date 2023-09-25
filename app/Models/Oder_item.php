@@ -15,4 +15,8 @@ class Oder_item extends Model
         'quantity',
         'subtotal',
     ];
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }

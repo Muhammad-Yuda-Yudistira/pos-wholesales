@@ -14,14 +14,16 @@ class CategorySeeder extends Seeder
     {
         // Data kategori yang ingin Anda masukkan
         $categories = [
-            'Teknologi',
+            'Makanan',
+            'Minuman',
             'Fashion',
-            'Elektronik',
             'Perlengkapan Rumah Tangga',
-            'Makanan dan Minuman',
-            'Kesehatan dan Kecantikan',
+            'Elektronik',
+            'Kesehatan',
+            'Kecantikan',
             'Olahraga',
-            'Hobi dan Rekreasi',
+            'Rokok',
+            'Hobi',
             'Lainnya',
             // Tambahkan lebih banyak kategori jika diperlukan
         ];
