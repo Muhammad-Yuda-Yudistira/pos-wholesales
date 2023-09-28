@@ -47,7 +47,7 @@ class HandleInertiaRequests extends Middleware
                 'response' => fn () => $request->session()->get('response')
             ],
             'id_sales' =>[
-                'id_sales' => fn () => $request->session()->get('id_sales')
+                'id_sales' => fn () => $request->session()->get('id_sales') ?? 5
             ],
         ];
     }

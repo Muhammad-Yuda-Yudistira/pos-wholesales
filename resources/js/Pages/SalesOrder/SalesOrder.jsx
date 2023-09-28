@@ -81,13 +81,17 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
 };
 
 const OrderSummary = () => {
-    const id = usePage().props.id_sales.id_sales;
+    const id =
+        usePage().props.id_sales.id_sales == null
+            ? 0
+            : usePage().props.id_sales.id_sales;
+    console.log(id);
     const { sales } = usePage().props;
-    const items = sales[0].items;
-    const subtotal = items.reduce(
-        (acc, item) => acc + parseInt(item.subtotal),
-        0
-    );
+    // const items = sales[0].items;
+    // const subtotal = items.reduce(
+    //     (acc, item) => acc + parseInt(item.subtotal),
+    //     0
+    // );
     const generateId = (number) => {
         return String(number).padStart(4, "0");
     };
@@ -97,6 +101,7 @@ const OrderSummary = () => {
             sales_id: id,
         });
     };
+    console.log(Invoice);
 
     return (
         <>
@@ -115,65 +120,7 @@ const OrderSummary = () => {
                     New Transaction
                 </Link>
             </div>
-            {id && (
-                <>
-                    <div className="px-3 py-2 border-y flex gap-5">
-                        <input
-                            type="text"
-                            value={Invoice}
-                            className="input input-sm border border-slate-300 w-36"
-                            readOnly
-                        />
-                    </div>
-
-                    <section
-                        id="body"
-                        className="overflow-y-scroll scrollable lg:h-64 2xl:h-[355px]"
-                    >
-                        <div className="px-3">
-                            <div className="grid grid-cols-4 bg-fuchsia-50 items-center h-9">
-                                <p className="col-span-2">Product</p>
-                                <p className="text-center">Qty</p>
-                                <p className="text-right">Price</p>
-                            </div>
-                            <Items data={sales} />
-                        </div>
-                    </section>
-                    <footer className="px-3 py-2">
-                        <div className="flex justify-between border-b text-slate-500">
-                            <p>SubTotal</p>
-                            <p>{subtotal.toLocaleString("id-ID")}</p>
-                        </div>
-                        <div className="flex justify-between border-b text-slate-500">
-                            <p>Discount</p>
-                            <p>0</p>
-                        </div>
-                        <div className="flex justify-between font-bold text-slate-800">
-                            <p>Grand Total</p>
-                            <p>{(subtotal + 0).toLocaleString("id-ID")}</p>
-                        </div>
-                        <div className="flex justify-between gap-x-3 mt-3 pr-3">
-                            <button
-                                onClick={() =>
-                                    document
-                                        .getElementById("modalBayar")
-                                        .showModal()
-                                }
-                                className="btn btn-fuchsia w-1/2"
-                            >
-                                Pay Now
-                            </button>
-                            <button
-                                onClick={() => handleClick(id)}
-                                className="btn btn-orange w-1/2"
-                            >
-                                Cancel Order
-                            </button>
-                        </div>
-                        <ModalBayar subtotal={subtotal} />
-                    </footer>
-                </>
-            )}
+            <div>{Invoice}</div>
         </>
     );
 };
