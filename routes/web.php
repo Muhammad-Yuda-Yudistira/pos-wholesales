@@ -39,6 +39,7 @@ Route::post('/sales_order/add_item',[SalesOrder::class,'add_item'])->name('sales
 Route::post('/sales_order/cancel',[SalesOrder::class,'cancel'])->name('sales_order.cancel');
 Route::post('/sales_order/counter_plus',[SalesOrder::class,'counter_plus'])->name('sales_order.counter_plus');
 Route::post('/sales_order/counter_minus',[SalesOrder::class,'counter_minus'])->name('sales_order.counter_minus');
+Route::post('/sales_order/pay',[SalesOrder::class,'pay'])->name('sales_order.pay');
 });
 
 

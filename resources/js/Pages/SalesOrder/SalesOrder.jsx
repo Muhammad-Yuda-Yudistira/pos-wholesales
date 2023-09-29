@@ -3,8 +3,8 @@ import App from "@/Layouts/App";
 import { Head } from "@inertiajs/react";
 import InputSearch from "@/daisyui/InputSearch";
 import ListCategory from "./ListCategory";
+import OrderSummary from "./OrderSummary";
 import { usePage, router, Link } from "@inertiajs/react";
-import ModalBayar from "./ModalBayar";
 
 const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
     const order_id = id_sales.id_sales;
@@ -72,108 +72,9 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-white rounded-xl my-5">
-                    <OrderSummary />
-                </div>
+                <OrderSummary />
             </div>
         </App>
-    );
-};
-
-const OrderSummary = () => {
-    const id =
-        usePage().props.id_sales.id_sales == null
-            ? 0
-            : usePage().props.id_sales.id_sales;
-    console.log(id);
-    const { sales } = usePage().props;
-    // const items = sales[0].items;
-    // const subtotal = items.reduce(
-    //     (acc, item) => acc + parseInt(item.subtotal),
-    //     0
-    // );
-    const generateId = (number) => {
-        return String(number).padStart(4, "0");
-    };
-    const Invoice = `INV/${new Date().getFullYear()}/ ${generateId(id)}`;
-    const handleClick = (id) => {
-        router.post("/sales_order/cancel", {
-            sales_id: id,
-        });
-    };
-    console.log(Invoice);
-
-    return (
-        <>
-            <div className="p-3 flex justify-between">
-                <h1 className="text-2xl font-semibold text-slate-800">
-                    <span className="font-extrabold">Order</span>
-                    Summary
-                </h1>
-                <Link
-                    href="/sales_order/new_transaction"
-                    method="post"
-                    as="button"
-                    type="button"
-                    className="btn btn-sm btn-outline-fuchsia"
-                >
-                    New Transaction
-                </Link>
-            </div>
-            <div>{Invoice}</div>
-        </>
-    );
-};
-
-const Items = (sales) => {
-    const data = sales.data[0].items;
-
-    const counterPlus = (id) => {
-        router.post("/sales_order/counter_plus", {
-            item_id: id,
-        });
-    };
-    const counterMinus = (id) => {
-        router.post("/sales_order/counter_minus", {
-            item_id: id,
-        });
-    };
-
-    return (
-        <>
-            {data.map((item, index) => (
-                <div
-                    key={index}
-                    className="grid grid-cols-4 border-b mt-2 py-1"
-                >
-                    <p className="col-span-2">{item.product.name}</p>
-                    <div className="flex justify-center">
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                counterMinus(item.id);
-                            }}
-                            className="btn btn-xs btn-outline-fuchsia"
-                        >
-                            -
-                        </button>
-                        <p className="px-2">{item.quantity}</p>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                counterPlus(item.id);
-                            }}
-                            className="btn btn-xs btn-outline-fuchsia"
-                        >
-                            +
-                        </button>
-                    </div>
-                    <p className="text-right">
-                        {parseInt(item.subtotal).toLocaleString("id-ID")}
-                    </p>
-                </div>
-            ))}
-        </>
     );
 };
 

@@ -7,7 +7,10 @@ use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Categories;
 use App\Models\Sales_order;
+use App\Models\InventoryAdjustment as Adjustment;
 use App\Models\Oder_item as OrderItem;
+use Illuminate\Support\Facades\DB;
+use App\Models\Customer;
 
 class SalesOrderController extends Controller
 {
@@ -64,8 +67,9 @@ class SalesOrderController extends Controller
     }
 
     public function counter_plus(Request $request){
-        $id=$request->item_id;
-        $item=OrderItem::find($id);
+        $order_id=$request->order_id;
+        $product_id=$request->product_id;
+        $item=OrderItem::find($order_id);
         $item->quantity++;
         $item->subtotal=$item->quantity * $item->product->price;
         $item->save();
@@ -73,8 +77,9 @@ class SalesOrderController extends Controller
     }
 
     public function counter_minus(Request $request){
-        $id=$request->item_id;
-        $item=OrderItem::find($id);
+        $order_id=$request->order_id;
+        $product_id=$request->product_id;
+        $item=OrderItem::find($order_id);
         if($item->quantity<=1){
             $item->delete();
             return back()->with('id_sales',$this->sales_id->id);
@@ -84,5 +89,34 @@ class SalesOrderController extends Controller
             $item->save();
         }
         return back()->with('id_sales',$this->sales_id->id);
+    }
+
+    public function pay(Request $request){
+        DB::beginTransaction();
+        try{
+            $subtotal=$request->subtotal;
+            $id=$request->sales_id;
+            $items=$request->items;
+            $customer=($request->customer==null)?Customer::unregistered():Customer::find($request->customer);
+            $invoice='INV/'.date('Y')."/".str_pad($id, 4, '0', STR_PAD_LEFT);
+            Adjustment::productOrder($items);
+            Sales_order::findOrFail($id)->update([
+                'payment_status'=>'paid',
+                'total_amount'=>$subtotal,
+                'invoice'=>$invoice,
+                'customer_id'=>$customer->id
+            ]);
+            DB::commit();
+            return back()->with('response',[$subtotal,$id,$invoice,$customer->id,$items[0]['product_id']]);
+        }catch(\Exception $e){
+            DB::rollBack();
+            return Inertia::render('SalesOrder/SalesOrder', [
+                'products' => Product::with('category','inventory')->get(),
+                'categories'=>Categories::all(),
+                'sales'=>Sales_order::with('items','items.product')
+                ->where('payment_status','unpaid')->orderBy('id','desc')->get(),
+                'errors' => $e->getMessage()
+            ]);
+        }
     }
 }

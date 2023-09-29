@@ -14,4 +14,15 @@ class Customer extends Model
     public function sales_order(){
         return $this->hasMany(SalesOrder::class);
     }
+
+
+    public static function unregistered(){
+       return Customer::create([
+            'first_name' => 'Unregistered',
+            'last_name' => 'unregistered',
+            'email' => 'unregistered',
+            'phone' => 'unregistered',
+            'address' => 'unregistered'
+        ]);
+    }
 }

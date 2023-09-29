@@ -20,8 +20,6 @@ class InventoryController extends Controller
         ]
     );
     }
-
-
     public function store(Request $request){
         $inventory=Inventory::find($request->product_id);
         $inventory->quantity_in_stock+=$request->quantity_change;
@@ -29,4 +27,5 @@ class InventoryController extends Controller
         Adjustment::create($request->all());
         return redirect()->route('inventory.index')->with('message','Stock Added Successfully');
     }
+
 }
