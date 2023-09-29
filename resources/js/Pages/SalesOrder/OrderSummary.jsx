@@ -9,6 +9,7 @@ const OrderSummary = () => {
     const newSubtotal =
         sales?.[0]?.items?.reduce((a, b) => a + parseInt(b.subtotal), 0) || 0;
     console.log(props);
+    const [show, setShow] = useState(false);
     return (
         <div className="bg-white rounded-xl my-5">
             <div className="flex justify-between h-14 items-center px-5">
@@ -16,6 +17,9 @@ const OrderSummary = () => {
                     <span className="font-bold">Order</span> Summary
                 </h1>
                 <Link
+                    onClick={() => {
+                        setShow(true);
+                    }}
                     href="/sales_order/new_transaction"
                     method="post"
                     as="button"
@@ -42,41 +46,45 @@ const OrderSummary = () => {
                         <Items key={index} data={item} />
                     ))}
             </div>
-            <div className="px-5 py-1">
-                <div className="flex justify-between">
-                    <p>Subtotal</p>
-                    <p>{newSubtotal.toLocaleString("id-ID")}</p>
+            {show && (
+                <div className="px-5 py-1">
+                    <div className="flex justify-between">
+                        <p>Subtotal</p>
+                        <p>{newSubtotal.toLocaleString("id-ID")}</p>
+                    </div>
+                    <div className="flex justify-between">
+                        <p>Diskon</p>
+                        <p>0</p>
+                    </div>
+                    <div className="flex justify-between font-semibold">
+                        <p>GrandTotal</p>
+                        <p>{newSubtotal.toLocaleString("id-ID")}</p>
+                    </div>
+                    <div className="flex justify-between gap-x-2 font-semibold mt-2">
+                        <button
+                            onClick={() =>
+                                document
+                                    .getElementById("modalBayar")
+                                    .showModal()
+                            }
+                            className=" btn w-1/2 btn-fuchsia"
+                        >
+                            Pay Now
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                router.post("/sales_order/cancel", {
+                                    sales_id: sales[0].id,
+                                });
+                            }}
+                            className=" btn w-1/2 btn-orange"
+                        >
+                            Cancel Order
+                        </button>
+                    </div>
                 </div>
-                <div className="flex justify-between">
-                    <p>Diskon</p>
-                    <p>0</p>
-                </div>
-                <div className="flex justify-between font-semibold">
-                    <p>GrandTotal</p>
-                    <p>{newSubtotal.toLocaleString("id-ID")}</p>
-                </div>
-                <div className="flex justify-between gap-x-2 font-semibold mt-2">
-                    <button
-                        onClick={() =>
-                            document.getElementById("modalBayar").showModal()
-                        }
-                        className=" btn w-1/2 btn-fuchsia"
-                    >
-                        Pay Now
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            router.post("/sales_order/cancel", {
-                                sales_id: sales[0].id,
-                            });
-                        }}
-                        className=" btn w-1/2 btn-orange"
-                    >
-                        Cancel Order
-                    </button>
-                </div>
-            </div>
+            )}
             {sales && sales.length > 0 && (
                 <ModalBayar
                     subtotal={newSubtotal}

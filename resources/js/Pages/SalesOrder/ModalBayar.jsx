@@ -43,7 +43,7 @@ const ModalBayar = (props) => {
                         readOnly
                     />
                     <button
-                        disabled={bayar > subtotal ? false : true}
+                        disabled={bayar >= subtotal ? false : true}
                         onClick={pay}
                         className="btn btn-fuchsia w-full mt-3"
                     >

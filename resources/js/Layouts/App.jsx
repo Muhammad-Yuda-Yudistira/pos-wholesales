@@ -7,7 +7,7 @@ const App = ({ children }) => {
         <div className="bg-gray-200 w-full h-full">
             <Navbar />
             <Sidebar />
-            <div className="ml-32 pt-16">{children}</div>
+            <div className="ml-32 2xl:ml-24 pt-16">{children}</div>
         </div>
     );
 };

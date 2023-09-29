@@ -40,6 +40,7 @@ Route::post('/sales_order/cancel',[SalesOrder::class,'cancel'])->name('sales_ord
 Route::post('/sales_order/counter_plus',[SalesOrder::class,'counter_plus'])->name('sales_order.counter_plus');
 Route::post('/sales_order/counter_minus',[SalesOrder::class,'counter_minus'])->name('sales_order.counter_minus');
 Route::post('/sales_order/pay',[SalesOrder::class,'pay'])->name('sales_order.pay');
+Route::get('/list_order',[SalesOrder::class,'list_order'])->name('sales_order.list_order');
 });
 
 

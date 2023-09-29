@@ -20,6 +20,11 @@ const Sidebar = () => {
                     icon="mdi:cart-outline"
                     text="Sales Order"
                 />
+                <ButtonSidebar
+                    href="/list_order"
+                    icon="material-symbols:order-approve-outline-sharp"
+                    text="List Order"
+                />
                 <ButtonSidebar icon="raphael:customer" text="Customer" />
                 <ButtonSidebar
                     href="/inventory"
