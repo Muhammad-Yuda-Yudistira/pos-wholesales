@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, usePage, router } from "@inertiajs/react";
 import ModalBayar from "./ModalBayar";
+import ModalInvoice from "./ModalInvoice";
+import Loading from "@/daisyui/Loading";
 const OrderSummary = () => {
     const { props } = usePage();
     const sales = props.sales;
@@ -8,8 +10,9 @@ const OrderSummary = () => {
     const [customer, setCustomer] = useState("");
     const newSubtotal =
         sales?.[0]?.items?.reduce((a, b) => a + parseInt(b.subtotal), 0) || 0;
-    console.log(props);
+    // console.log(props);
     const [show, setShow] = useState(false);
+
     return (
         <div className="bg-white rounded-xl my-5">
             <div className="flex justify-between h-14 items-center px-5">
@@ -29,15 +32,17 @@ const OrderSummary = () => {
                     New Transaction
                 </Link>
             </div>
-            <div className="border-y-2 border-dashed  h-14 flex items-center px-5">
-                <input
-                    type="text"
-                    value={customer}
-                    onChange={(e) => setCustomer(e.target.value)}
-                    placeholder="Customer"
-                    className="focus:border-none border-fuchsia-900 focus:outline-none rounded w-44"
-                />
-            </div>
+            {show && (
+                <div className="border-y-2 border-dashed  h-14 flex items-center px-5">
+                    <input
+                        type="text"
+                        value={customer}
+                        onChange={(e) => setCustomer(e.target.value)}
+                        placeholder="Customer"
+                        className="focus:border-none border-fuchsia-900 focus:outline-none rounded w-44"
+                    />
+                </div>
+            )}
             <div className="px-5 py-1 h-[260px] overflow-y-auto scrollable">
                 <p className="text-red-500">{errors.length > 0 && errors}</p>
                 {sales &&
@@ -93,6 +98,8 @@ const OrderSummary = () => {
                     items={sales[0].items}
                 />
             )}
+            <Loading />
+            <ModalInvoice />
         </div>
     );
 };

@@ -106,8 +106,13 @@ class SalesOrderController extends Controller
                 'invoice'=>$invoice,
                 'customer_id'=>$customer->id
             ]);
+            $date=Sales_order::findOrFail($id)->order_date;
             DB::commit();
-            return back()->with('response',[$subtotal,$id,$invoice,$customer->id,$items[0]['product_id']]);
+            return back()->with('response',[
+                'invoice'=>$invoice,
+                'subtotal'=>$subtotal,
+                'date'=>$date
+            ]);
         }catch(\Exception $e){
             DB::rollBack();
             return Inertia::render('SalesOrder/SalesOrder', [

@@ -3,13 +3,15 @@ import App from "@/Layouts/App";
 import { Head } from "@inertiajs/react";
 
 const User = ({ users }) => {
-    console.log(users);
     return (
         <App>
             <Head title="User" />
             <div className="flex gap-5 p-5">
                 {users.map((user) => (
-                    <div className="card w-96 bg-base-100 shadow-xl">
+                    <div
+                        key={user.id}
+                        className="card w-96 bg-base-100 shadow-xl"
+                    >
                         <div className="card-body">
                             <h2 className="card-title">{user.username}</h2>
                             <p>{user.email}</p>

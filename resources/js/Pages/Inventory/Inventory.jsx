@@ -13,7 +13,7 @@ const Inventory = (props) => {
     return (
         <App>
             <Head title="Inventory" />
-            <div className="grid grid-cols-3 gap-3 py-5 pr-5">
+            <div className="grid grid-cols-3 gap-3 py-5 px-5">
                 <div className="col-span-2">
                     <ButtonCategory data={categories} />
                     <InventoryProductTable data={inventories} />

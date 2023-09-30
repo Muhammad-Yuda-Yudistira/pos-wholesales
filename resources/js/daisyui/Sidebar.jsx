@@ -25,7 +25,11 @@ const Sidebar = () => {
                     icon="material-symbols:order-approve-outline-sharp"
                     text="List Order"
                 />
-                <ButtonSidebar icon="raphael:customer" text="Customer" />
+                <ButtonSidebar
+                    href="/customer"
+                    icon="raphael:customer"
+                    text="Customer"
+                />
                 <ButtonSidebar
                     href="/inventory"
                     icon="material-symbols:warehouse-outline"

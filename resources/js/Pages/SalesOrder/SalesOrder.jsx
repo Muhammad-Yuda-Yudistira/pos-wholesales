@@ -14,11 +14,10 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
             productId: id,
         });
     };
-
     return (
         <App>
             <Head title="Sales Order" />
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-3 gap-5 ml-5">
                 <div className="col-span-2 py-5">
                     <div className="flex justify-between items-center">
                         <h2 className="font-semibold text-xl text-gray-900 leading-tight">

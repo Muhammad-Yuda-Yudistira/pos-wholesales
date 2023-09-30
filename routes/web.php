@@ -6,6 +6,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesOrderController as SalesOrder;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::post('/sales_order/counter_plus',[SalesOrder::class,'counter_plus'])->nam
 Route::post('/sales_order/counter_minus',[SalesOrder::class,'counter_minus'])->name('sales_order.counter_minus');
 Route::post('/sales_order/pay',[SalesOrder::class,'pay'])->name('sales_order.pay');
 Route::get('/list_order',[SalesOrder::class,'list_order'])->name('sales_order.list_order');
+Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
 });
 
 

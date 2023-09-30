@@ -34,6 +34,7 @@ const TableListOrder = ({ data }) => {
                         <th>Customer</th>
                         <th>Total Amount</th>
                         <th>Payment Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,7 @@ const TableListOrder = ({ data }) => {
                                 )}
                             </td>
                             <td>{item.payment_status}</td>
+                            <td></td>
                         </tr>
                     ))}
                 </tbody>
