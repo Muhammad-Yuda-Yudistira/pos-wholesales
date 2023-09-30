@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, usePage, router } from "@inertiajs/react";
+import Items from "./Items";
 import ModalBayar from "./ModalBayar";
 import ModalInvoice from "./ModalInvoice";
 import Loading from "@/daisyui/Loading";
@@ -10,9 +11,12 @@ const OrderSummary = () => {
     const [customer, setCustomer] = useState("");
     const newSubtotal =
         sales?.[0]?.items?.reduce((a, b) => a + parseInt(b.subtotal), 0) || 0;
-    // console.log(props);
     const [show, setShow] = useState(false);
-
+    const handleCancel = () => {
+        router.post("/sales_order/cancel", {
+            sales_id: sales[0].id,
+        });
+    };
     return (
         <div className="bg-white rounded-xl my-5">
             <div className="flex justify-between h-14 items-center px-5">
@@ -79,9 +83,7 @@ const OrderSummary = () => {
                         <button
                             onClick={(e) => {
                                 e.preventDefault();
-                                router.post("/sales_order/cancel", {
-                                    sales_id: sales[0].id,
-                                });
+                                handleCancel();
                             }}
                             className=" btn w-1/2 btn-orange"
                         >
@@ -100,57 +102,6 @@ const OrderSummary = () => {
             )}
             <Loading />
             <ModalInvoice />
-        </div>
-    );
-};
-
-const Items = ({ data }) => {
-    const plus = (order_id, product_Id) => {
-        router.post("/sales_order/counter_plus", {
-            order_id: order_id,
-            product_id: product_Id,
-        });
-    };
-    const minus = (order_id, product_id) => {
-        router.post("/sales_order/counter_minus", {
-            order_id: order_id,
-            product_id: product_id,
-        });
-    };
-    return (
-        <div className="border-b pb-1">
-            <p className="first-letter:uppercase text-lg text-slate-500">
-                {data.product.name}
-            </p>
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-x-2">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            minus(data.id, data.product_id);
-                        }}
-                        className="btn btn-xs btn-outline-fuchsia"
-                    >
-                        -
-                    </button>
-                    <input
-                        type="text"
-                        value={data.quantity}
-                        className="w-14 h-7 text-center rounded-full border-fuchsia-950"
-                        readOnly
-                    />
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            plus(data.id, data.product_id);
-                        }}
-                        className="btn btn-xs btn-outline-fuchsia"
-                    >
-                        +
-                    </button>
-                </div>
-                <p>{parseFloat(data.subtotal).toLocaleString("id-ID")}</p>
-            </div>
         </div>
     );
 };

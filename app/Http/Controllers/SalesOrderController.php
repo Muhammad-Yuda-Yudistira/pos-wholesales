@@ -63,7 +63,7 @@ class SalesOrderController extends Controller
     public function cancel(Request $request){
         $id=$request->sales_id;
         Sales_order::destroy($id);
-        return redirect()->route('sales_order.index')->with('response',$id);
+        return back()->with('response',$id);
     }
 
     public function counter_plus(Request $request){

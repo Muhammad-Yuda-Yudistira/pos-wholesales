@@ -14,6 +14,10 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
             productId: id,
         });
     };
+
+    const handleChange = () => {
+        console.log("tess");
+    };
     return (
         <App>
             <Head title="Sales Order" />
