@@ -4,7 +4,6 @@ import { usePage } from "@inertiajs/react";
 
 const ModalInvoice = () => {
     const data = usePage().props.response.response;
-    console.log(data);
     return (
         <dialog id="modalInvoice" className="modal">
             <div className="modal-box p-0">

@@ -1,9 +1,9 @@
 import React from "react";
 import App from "@/Layouts/App";
 import { Head, usePage } from "@inertiajs/react";
+import Paginate from "@/daisyui/Paginate";
 
 const ListOrder = (props) => {
-    console.log(props.list_order);
     return (
         <App>
             <Head title="List Order" />
@@ -17,7 +17,13 @@ const ListOrder = (props) => {
                     className="input input-bordered w-full max-w-xs"
                 />
             </div>
-            <TableListOrder data={props.list_order} />
+            <TableListOrder data={props.list_order.data} />
+            <div className="px-5 -mt-7">
+                <Paginate
+                    data={props.list_order.links}
+                    total={props.list_order.total}
+                />
+            </div>
         </App>
     );
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import App from "@/Layouts/App";
 import { Head, Link } from "@inertiajs/react";
+import Paginate from "@/daisyui/Paginate";
 
 const Customer = (props) => {
     const customers = props.customers.data;
     const links = props.customers.links;
-    console.log(props.customers);
     return (
         <App>
             <Head title="Customer" />
@@ -56,47 +56,6 @@ const TableCustomer = ({ data }) => {
                     ))}
                 </tbody>
             </table>
-        </div>
-    );
-};
-
-const Paginate = ({ data, total }) => {
-    const newLinks = data.filter((item) => {
-        return !isNaN(item.label);
-    });
-    const PrevNext = data.filter((item) => {
-        return isNaN(item.label);
-    });
-    return (
-        <div className="flex justify-between items-center">
-            <p className="text-slate-900 text-lg">
-                Showing {newLinks.length} of {total}
-            </p>
-            <div className="join mt-5">
-                <Link
-                    href={PrevNext[0].url}
-                    className="join-item bg-white hover:bg-fuchsia-300 btn"
-                >
-                    &laquo;
-                </Link>
-                {newLinks.map((item, index) => (
-                    <Link
-                        href={item.url}
-                        key={index}
-                        className={`join-item bg-white hover:bg-fuchsia-300 btn ${
-                            item.active ? "bg-fuchsia-500" : ""
-                        }`}
-                    >
-                        {item.label}
-                    </Link>
-                ))}
-                <Link
-                    href={PrevNext[1].url}
-                    className="join-item bg-white hover:bg-fuchsia-300 btn"
-                >
-                    &raquo;
-                </Link>
-            </div>
         </div>
     );
 };

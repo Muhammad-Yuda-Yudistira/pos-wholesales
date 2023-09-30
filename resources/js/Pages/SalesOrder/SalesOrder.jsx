@@ -6,8 +6,9 @@ import ListCategory from "./ListCategory";
 import OrderSummary from "./OrderSummary";
 import { usePage, router, Link } from "@inertiajs/react";
 
-const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
+const SalesOrder = ({ products, id_sales }) => {
     const order_id = id_sales.id_sales;
+    const [newProduct, setNewProduct] = useState(products);
     const handleClick = (id) => {
         router.post("/sales_order/add_item", {
             orderId: order_id,
@@ -15,8 +16,12 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
         });
     };
 
-    const handleChange = () => {
-        console.log("tess");
+    const handleChange = (e) => {
+        const keyword = e.target.value.toLowerCase();
+        const newData = products.filter((product) => {
+            return product.name.toLowerCase().includes(keyword);
+        });
+        setNewProduct(newData);
     };
     return (
         <App>
@@ -27,7 +32,7 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
                         <h2 className="font-semibold text-xl text-gray-900 leading-tight">
                             Category
                         </h2>
-                        <InputSearch />
+                        <InputSearch onChange={handleChange} />
                     </div>
                     <ListCategory />
                     <div className="pt-5  flex flex-col gap-y-3 lg:max-h-[396px] 2xl:max-h-[493px] overflow-y-scroll scrollable">
@@ -43,7 +48,7 @@ const SalesOrder = ({ categories, products, id_sales, response, sales }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map((product, index) => (
+                                    {newProduct.map((product, index) => (
                                         <tr key={index}>
                                             <th>{index + 1}</th>
                                             <td>{product.name}</td>

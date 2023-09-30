@@ -128,7 +128,7 @@ class SalesOrderController extends Controller
 
     public function list_order(){
         return Inertia::render('SalesOrder/ListOrder',[
-            'list_order'=>Sales_order::with('items','items.product')->orderBy('id','desc')->get(),
+            'list_order'=>Sales_order::with('items','items.product')->orderBy('id','desc')->paginate(10),
         ]);
     }
 }
