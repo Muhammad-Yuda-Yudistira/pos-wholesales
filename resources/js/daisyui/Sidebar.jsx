@@ -36,7 +36,11 @@ const Sidebar = () => {
                     text="Inventory"
                 />
                 <ButtonSidebar icon="mdi:report-box-outline" text="Report" />
-                <ButtonSidebar icon="uil:setting" text="Settings" />
+                <ButtonSidebar
+                    href="/settings"
+                    icon="uil:setting"
+                    text="Settings"
+                />
             </ul>
         </div>
     );

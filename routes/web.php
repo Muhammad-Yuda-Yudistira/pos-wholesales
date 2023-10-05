@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesOrderController as SalesOrder;
+use App\Http\Controllers\SettingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,7 @@ Route::get('/invoice/{prefix}/{year}/{number}',[SalesOrder::class,'invoice'])->n
 Route::get('/struk/{prefix}/{year}/{number}',[SalesOrder::class,'struk'])->name('sales_order.struk');
 Route::get('/list_order',[SalesOrder::class,'list_order'])->name('sales_order.list_order');
 Route::get('/customer',[CustomerController::class,'index'])->name('customer.index');
+Route::get('/settings',[SettingController::class,'index'])->name('settings.index');
 });
 
 
