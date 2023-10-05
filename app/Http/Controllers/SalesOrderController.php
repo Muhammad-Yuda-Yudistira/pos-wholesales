@@ -131,4 +131,21 @@ class SalesOrderController extends Controller
             'list_order'=>Sales_order::with('items','items.product')->orderBy('id','desc')->paginate(10),
         ]);
     }
+
+    public function invoice($prefix,$year,$number){
+        $invoice=$prefix.'/'.$year.'/'.$number;
+        $invoice=Sales_order::with('customer','items.product')->where('invoice',$invoice)->first();
+
+        return Inertia::render('SalesOrder/Invoice',[
+            'invoice'=>$invoice,
+        ]);
+    }
+    public function struk($prefix,$year,$number){
+        $invoice=$prefix.'/'.$year.'/'.$number;
+        $invoice=Sales_order::with('customer','items.product')->where('invoice',$invoice)->first();
+
+        return Inertia::render('SalesOrder/Struk',[
+            'invoice'=>$invoice,
+        ]);
+    }
 }

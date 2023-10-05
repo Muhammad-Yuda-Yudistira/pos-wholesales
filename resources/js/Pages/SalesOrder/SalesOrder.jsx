@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import InputSearch from "@/daisyui/InputSearch";
 import ListCategory from "./ListCategory";
 import OrderSummary from "./OrderSummary";
-import { usePage, router, Link } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 
 const SalesOrder = ({ products, id_sales }) => {
     const order_id = id_sales.id_sales;

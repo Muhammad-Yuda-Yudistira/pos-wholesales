@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function index(){
         return Inertia::render('Customer/Customer', [
-            'customers' => Customer::orderBy('id','desc')->paginate(15),
+            'customers' => Customer::orderBy('id','desc')->paginate(10),
         ]);
     }
 }

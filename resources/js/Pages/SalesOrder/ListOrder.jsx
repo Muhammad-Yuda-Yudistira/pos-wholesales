@@ -48,7 +48,15 @@ const TableListOrder = ({ data }) => {
                         <tr key={index}>
                             <th>{index + 1}</th>
                             <td>{item.order_date}</td>
-                            <td>{item.invoice}</td>
+                            <td>
+                                <a
+                                    className="text-blue-600 hover:underline hover:italic"
+                                    target="_blank"
+                                    href={"/struk/" + item.invoice}
+                                >
+                                    {item.invoice}
+                                </a>
+                            </td>
                             <td>{item.customer_id}</td>
                             <td>
                                 {parseFloat(item.total_amount).toLocaleString(

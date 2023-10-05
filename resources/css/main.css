@@ -21,3 +21,13 @@
 .btn-outline-fuchsia{
   @apply border-fuchsia-900 hover:border-fuchsia-800 bg-white hover:bg-fuchsia-900 text-fuchsia-900 hover:text-white
 }
+
+@media print{
+  .print{
+    @apply hidden;
+  }
+  @page {
+    size: 7.8cm 100%;
+    margin: 0;
+  }
+}

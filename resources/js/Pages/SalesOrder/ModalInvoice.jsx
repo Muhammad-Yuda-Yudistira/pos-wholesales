@@ -6,7 +6,7 @@ const ModalInvoice = () => {
     const data = usePage().props.response.response;
     return (
         <dialog id="modalInvoice" className="modal">
-            <div className="modal-box p-0">
+            <div className="modal-box p-0 scrollable">
                 <div className="">
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle text-gray-200 btn-ghost absolute right-2 top-2">
@@ -97,13 +97,20 @@ const ModalInvoice = () => {
                         </div>
                     </div>
                     <div className="flex justify-end gap-x-2 mb-10">
-                        <button className="btn btn-orange uppercase">
-                            <Icon
-                                icon="material-symbols:download-rounded"
-                                className="text-xl"
-                            />
-                            Invoice PDF
-                        </button>
+                        {data != null && (
+                            <a
+                                target="_blank"
+                                href={"/invoice/" + data.invoice}
+                                className="btn btn-orange uppercase"
+                            >
+                                <Icon
+                                    icon="material-symbols:download-rounded"
+                                    className="text-xl"
+                                />
+                                Invoice PDF
+                            </a>
+                        )}
+
                         <button className="btn btn-outline-fuchsia uppercase">
                             <Icon
                                 icon="material-symbols:print"

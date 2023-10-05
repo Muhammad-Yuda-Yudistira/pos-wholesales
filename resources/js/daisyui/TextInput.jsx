@@ -7,7 +7,7 @@ const TextInput = ({ type = "text", eye = false, label, ...props }) => {
         setShow((prevShow) => (prevShow === "text" ? "password" : "text"));
     };
     return (
-        <>
+        <div>
             <label className="label">
                 <span className="label-text text-slate-950">{label}</span>
             </label>
@@ -15,7 +15,7 @@ const TextInput = ({ type = "text", eye = false, label, ...props }) => {
                 {...props}
                 type={eye ? show : type}
                 placeholder={label}
-                className="input input-bordered w-full focus:border-fuchsia-950"
+                className="input input-bordered w-full focus:border-fuchsia-950 "
             />
             {eye && (
                 <button
@@ -35,7 +35,7 @@ const TextInput = ({ type = "text", eye = false, label, ...props }) => {
                     )}
                 </button>
             )}
-        </>
+        </div>
     );
 };
 

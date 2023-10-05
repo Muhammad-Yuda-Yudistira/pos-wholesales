@@ -25,8 +25,10 @@ const Paginate = ({ data, total }) => {
                         href={item.url}
                         key={index}
                         className={
-                            `join-item bg-white hover:bg-fuchsia-300 btn ` +
-                            (item.active ? "bg-fuchsia-300" : "")
+                            `join-item hover:bg-fuchsia-300 btn ` +
+                            (item.active
+                                ? "bg-fuchsia-800 text-white"
+                                : "bg-white")
                         }
                     >
                         {item.label}

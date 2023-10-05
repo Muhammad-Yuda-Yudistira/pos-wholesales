@@ -14,6 +14,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+                struk:['Merchant Copy Regular', 'sans']
             },
             
         },
