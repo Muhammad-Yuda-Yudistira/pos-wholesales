@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import App from "@/Layouts/App";
-import { Head } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { Icon } from "@iconify/react";
 import ModalAddProduct from "./ModalAddProduct";
+import ModalEditProduct from "./ModalEditProduct";
+
 const Product = ({ product }) => {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const { flash } = usePage().props;
 
     const handleSearch = () => {
         const lowerCaseKeyword = searchKeyword.toLowerCase();
@@ -60,6 +63,24 @@ const Product = ({ product }) => {
                     Add New Product
                 </button>
             </div>
+            {flash.message && (
+                <div className="alert alert-success m-5 w-[96%]">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>{flash.message}</span>
+                </div>
+            )}
             <div className="overflow-x-auto bg-white rounded-lg  m-5">
                 <table className="table">
                     <thead>
@@ -68,6 +89,7 @@ const Product = ({ product }) => {
                             <th>Name</th>
                             <th>Category</th>
                             <th>Price</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,12 +114,44 @@ const Product = ({ product }) => {
                                       <td>{product.name}</td>
                                       <td>{product.category.name}</td>
                                       <td>{product.price}</td>
+                                      <td>
+                                          <a
+                                              href={`product/${product.id}/edit`}
+                                              className="badge badge-accent mx-3"
+                                              onClick={() =>
+                                                  document
+                                                      .getElementById(
+                                                          "add_product"
+                                                      )
+                                                      .showModal()
+                                              }
+                                          >
+                                              Edit
+                                          </a>
+                                          <Link
+                                              href="/product"
+                                              as="button"
+                                              className="badge badge-secondary"
+                                              method="post"
+                                              data={{ id: product.id }}
+                                              onClick={(e) => {
+                                                  if (
+                                                      !confirm("Are you sure?")
+                                                  ) {
+                                                      e.preventDefault(); // Mencegah perubahan rute jika pengguna membatalkan konfirmasi
+                                                  }
+                                              }}
+                                          >
+                                              Delete
+                                          </Link>
+                                      </td>
                                   </tr>
                               ))}
                     </tbody>
                 </table>
             </div>
             <ModalAddProduct />
+            <ModalEditProduct />
         </App>
     );
 };

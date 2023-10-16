@@ -10,29 +10,51 @@ use App\Models\Inventory;
 
 class ProductController extends Controller
 {
-    public function index(){
-        return Inertia::render('Product/Product',[
-            'product'=>Product::with('category')->orderBy('id','desc')->get(),
-            'category'=>Categories::all(),
+    public function index()
+    {
+        return Inertia::render('Product/Product', [
+            'product' => Product::with('category')->orderBy('id', 'desc')->get(),
+            'category' => Categories::all(),
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'name'=>'required',
-            'price'=>'required',
-            'category_id'=>'required',
-            'description'=>'required',
-            'cost_price'=>'required',
+            'name' => 'required',
+            'price' => 'required',
+            'category_id' => 'required',
+            'description' => 'required',
+            'cost_price' => 'required',
         ]);
         try {
-            $product=Product::create($request->all());
+            $product = Product::create($request->all());
             Inventory::create([
-                'product_id'=>$product->id,
+                'product_id' => $product->id,
             ]);
-        return redirect()->route('product.index')->with('message','Product Added Successfully');
+            return redirect()->route('product.index')->with('message', 'Product Added Successfully');
         } catch (\Exception $e) {
             return Inertia::render('Product.index')->with('message', 'Failed to Add Product: ' . $e->getMessage());
+        }
+    }
+
+    public function edit(Product $id)
+    {
+        dd($id);
+    }
+
+    public function destroy(Request $request)
+    {
+        try {
+            // delete dulu di inventori
+            Inventory::where('product_id', $request->id)->delete();
+            Product::where('id', $request->id)->delete();
+
+            // Setelah menghapus produk, Anda dapat melakukan redirect atau memberikan respons sesuai kebutuhan.
+            return redirect()->route('product.index')->with('message', 'Product Deleted Successfully');
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika terjadi
+            return redirect()->route('product.index')->with('message', "Failed to Delete Product" . $e->getMessage());
         }
     }
 }
